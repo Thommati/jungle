@@ -76,6 +76,14 @@ main section.categories-show {
   }
 }
 
+li.list-item {
+  display: flex;
+
+  p {
+    font-size: 1em;
+  }
+}
+
 main section.products-show {
 
   .product-detail {
