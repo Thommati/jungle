@@ -6,9 +6,11 @@
 
   <% if enhanced_cart().empty? %>
 
-    <p>Your shopping cart is currently empty.
-      <%= link_to 'You can browse items to add to your cart by clicking here.', :root %>
-    </p>
+    <div class="alert alert-info">
+      <p>Your shopping cart is currently empty.
+        <%= link_to 'You can browse items to add to your cart by clicking here.', :root, :class => 'alert-link' %>
+      </p>
+    </div>
 
   <% else %>
 
