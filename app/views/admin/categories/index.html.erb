@@ -1,6 +1,6 @@
 <section>
   <header class="page-header">
-    <h1>Admin &raquo; All Products</h1>
+    <h1>Admin &raquo; All Categories</h1>
   </header>
 
   <div class="well">
@@ -10,7 +10,8 @@
   <ul class="list-group">
   <% @categories.each do |category| %>
     <li class="list-group-item">
-      <%= category.name %>
+      <span><%= category.name %></span>
+      <span class="badge"><%= category.products.size %></span>
     </li>
   <% end %>
 </ul>
