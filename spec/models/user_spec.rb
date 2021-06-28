@@ -50,5 +50,12 @@ RSpec.describe User, type: :model do
       @user.save
       expect(@user.errors.full_messages).to include("Last name can't be blank")
     end
+
+    it 'fails to save user if password length is less than 4' do
+      @user.password = 'bow'
+      @user.password_confirmation = 'bow'
+      @user.save
+      expect(@user.errors.full_messages).to include("Password is too short (minimum is 4 characters)")
+    end
   end
 end
