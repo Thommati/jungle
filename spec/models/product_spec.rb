@@ -22,28 +22,28 @@ RSpec.describe Product, type: :model do
       @product.name = nil
       @product.save
 
-      expect(@product.errors.full_messages).to include("Name can't be blank");
+      expect(@product.errors.full_messages).to include("Name can't be blank")
     end
 
     it "gives 'Price cents is not a number' error when price is nil" do
       @product.price_cents = nil
       @product.save
 
-      expect(@product.errors.full_messages).to include("Price cents is not a number");
+      expect(@product.errors.full_messages).to include("Price cents is not a number")
     end
 
     it "gives 'Quantity can't be blank' error when quantity is nil" do
       @product.quantity = nil
       @product.save
 
-      expect(@product.errors.full_messages).to include("Quantity can't be blank");
+      expect(@product.errors.full_messages).to include("Quantity can't be blank")
     end
 
     it "gives 'Category can't be blank' error when category is nil" do
       @product.category = nil
       @product.save
 
-      expect(@product.errors.full_messages).to include("Category can't be blank");
+      expect(@product.errors.full_messages).to include("Category can't be blank")
     end
   end
 end
