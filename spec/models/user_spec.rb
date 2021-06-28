@@ -29,6 +29,8 @@ RSpec.describe User, type: :model do
       @user.save
 
       @user2 = User.new(first_name: 'Darcy', last_name: 'Dog', email: 'dog@example.com', password: 'woof', password_confirmation: 'woof')
+
+      expect { @user2.save }.to raise_error(ActiveRecord::RecordNotUnique)
     end
   end
 end
