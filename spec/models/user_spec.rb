@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'Validations' do
-    before(:each) do
-      @user = User.new(first_name: 'Darcy', last_name: 'Dog', email: 'dog@example.com', password: 'woof', password_confirmation: 'woof')
-    end
+  before(:each) do
+    @user = User.new(first_name: 'Darcy', last_name: 'Dog', email: 'dog@example.com', password: 'woof', password_confirmation: 'woof')
+  end
 
+  describe 'Validations' do
     it 'successfully save a new user with fields correctly filled out' do
       @user.save!
     end
@@ -56,6 +56,38 @@ RSpec.describe User, type: :model do
       @user.password_confirmation = 'bow'
       @user.save
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 4 characters)")
+    end
+  end
+
+  describe '.authenticate_with_credentials' do
+    it 'should return the correct user object when correct credentials are used to log in' do
+      @user.save
+      logged_in_user = User.authenticate_with_credentials('dog@example.com', 'woof')
+      expect(logged_in_user).to be_a(User)
+    end
+
+    it 'should return nil if the user does not exist' do
+      @user.save
+      logged_in_user = User.authenticate_with_credentials('darcy@example.com', 'woof')
+      expect(logged_in_user).to be_nil()
+    end
+
+    it 'should return nil if the incorrect password is used for an existing user' do
+      @user.save
+      logged_in_user = User.authenticate_with_credentials('dog@example.com', 'woofy')
+      expect(logged_in_user).to be_nil()
+    end
+
+    it 'should return a User object when email has leading white space' do
+      @user.save
+      logged_in_user = User.authenticate_with_credentials('   dog@example.com', 'woof')
+      expect(logged_in_user).to be_a(User)
+    end
+
+    it 'should return a User object regardless of email case' do
+      @user.save
+      logged_in_user = User.authenticate_with_credentials('DOG@exaMple.cOM', 'woof')
+      expect(logged_in_user).to be_a(User)
     end
   end
 end
