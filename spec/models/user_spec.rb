@@ -32,5 +32,23 @@ RSpec.describe User, type: :model do
 
       expect { @user2.save }.to raise_error(ActiveRecord::RecordNotUnique)
     end
+
+    it 'should not save a new user if email is nil' do
+      @user.email = nil
+      @user.save
+      expect(@user.errors.full_messages).to include("Email can't be blank")
+    end
+
+    it 'should not save a new user if first_name is nil' do
+      @user.first_name = nil
+      @user.save
+      expect(@user.errors.full_messages).to include("First name can't be blank")
+    end
+
+    it 'should not save a new user if last_name is nil' do
+      @user.last_name = nil
+      @user.save
+      expect(@user.errors.full_messages).to include("Last name can't be blank")
+    end
   end
 end
